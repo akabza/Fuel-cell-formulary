@@ -412,7 +412,6 @@ This relation becomes linear by using a logarithmic y-axes like shown in figure 
 \subsection{Example PolCurve}
 %----------------------------
 
-
 The PolCurve plots the cell voltage versus current density of a single cell or stack. Figure \ref{fig:PolCurve} shows an theoretical PolCurve, including the electric and thermal power based on LHV or HHV (equation~\ref{eqn:P_therm}), and the electric efficiency based on LHV (\ref{eqn:eta_el}).
 
 \begin{figure}
@@ -427,7 +426,7 @@ voltage current dependency quite well (see \cite{lit:Srinivasan}, \cite{lit:Kim}
 
 \begin{equation}
   \label{eqn:E_empirical}
-  E = E_0 - b \cdot (\log j +3) - R j - m \cdot \exp^{n j}
+  E = E_0 - b \cdot (\log j +3) - R j - m \cdot e^{n j}
 \end{equation}
 
 The parameters are:
