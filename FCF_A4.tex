@@ -2,7 +2,7 @@
 % Just another Fuel Cell Formulary by Dr. Alexander Kabza
 %
 % Created: November 4, 2002 (started as Word document, converted to LaTeX in August 2010)
-% last modified: 2022-05-03 - this version can be optimized for DIN A4 page layout or Smartphone layout (DIN A5 page layout)!
+% last modified: 2024-06-12 - this version can be optimized for DIN A4 page layout or Smartphone layout (DIN A5 page layout)!
 %
 % Open issues: (marked by ***)
 % - 
@@ -42,6 +42,9 @@
 \usepackage{wrapfig}
 \usepackage[pdfborder=1 1 1]{hyperref}
 
+% for URLs
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=green]{hyperref}
+
 % Alias
 \renewcommand{\familydefault}{\sfdefault}
 \newcommand{\gradC}{${}^\circ$C}      % fuer Grad Celsius in Text-Umgebung
@@ -75,15 +78,36 @@
 
 \selectlanguage{english}
 
-\title{\Large Just another \\ \ \\ \Huge Fuel Cell Formulary}
+\title{\Large Just another \\[.75cm] 
+  \Huge Fuel Cell Formulary}
 \author{\Large by Dr. Alexander Kabza}
 \begin{A4}
-  \date{\scriptsize Created 2001-03-16.\\This version is from \today\ and optimized for DIN A4 page layout.\\ Latest version see www.kabza.de.
-  Don't hesitate to send me any comments or failures or ideas by email!}
+  \date{
+    \scriptsize Created 2001-03-16.
+    \\[.3cm]
+    This version is from \today\ and optimized for DIN A4 page layout.
+    \\[.3cm] 
+    For the latest PDF version visit  \url{www.kabza.de} or
+    \url{https://github.com/akabza/Fuel-cell-formulary}
+    \\[.3cm]
+    Don't hesitate to send me any comments or failures or ideas by email!
+    \\[2cm]
+    \includegraphics[width=13cm]{PEMFC_EN_small.png}
+  }
 \end{A4}  
 \begin{Smartphone}
-  \date{\scriptsize Created 2001-03-16.\\This version is from \today\ and optimized for Smartphones.\\ Latest version see www.kabza.de.
-  Don't hesitate to send me any comments or failures or ideas by email!}
+  \date{
+    \scriptsize Created 2001-03-16.
+    \\[.3cm]
+    This version is from \today\ and optimized for Smartphones.
+    \\[.3cm] 
+    For the latest PDF version visit \url{www.kabza.de} or
+    \url{https://github.com/akabza/Fuel-cell-formulary}
+    \\[.3cm]
+    Don't hesitate to send me any comments or failures or ideas by email!
+    \\[2cm]
+    \includegraphics[width=13cm]{PEMFC_EN_small.png}
+  }
 \end{Smartphone} 
  
 \maketitle
@@ -1472,7 +1496,7 @@ Specific humidity Y is the ratio between the actual mass of water vapor $m_\text
   =\frac{M_\text{w}}{M_\text{air}} \cdot \frac{p_\text{w}(t)}{p_\text{air} - p_\text{w}(t)}  \qquad [Y]= \si{\kilo\gram\per\kilo\gram}
 \end{equation}
 
-With $R_\text{w} / R_\text{air} = 0.622$ and $p_\text{w}(t) = \varphi\,\cdot p_\text{ws}(t)$ (see below) we get:
+With $R_\text{w} / R_\text{air} = 0.622$, $p_\text{w}(t) = \varphi\,\cdot p_\text{ws}(t)$ (see below) and $p_\text{air}$ as absolute (moist) air pressure we get:
 
 \begin{equation}
   \label{eqn:Yphi}
@@ -1482,7 +1506,7 @@ With $R_\text{w} / R_\text{air} = 0.622$ and $p_\text{w}(t) = \varphi\,\cdot p_\
 
 The maximum amount of water vapor in the air is achieved when $p_\text{w}(t) =p_\text{ws}(t)$ the saturation pressure of water vapor at the temperature $t$.
 
-For other gases the molar weight has to be considered in the equation above. The constant value 0.622 is only valid for moist air!
+For other gases the molar weight has to be considered in the equation above. And the constant value $R_\text{w} / R_\text{air} = 0.622$ is of course only valid for moist air!
 
 Since the water vapor pressure is small regarding to the atmospheric pressure, the relation between the humidity ratio and the saturation pressure is almost linear at temperature far below 100\gradC.
 
@@ -2144,5 +2168,3 @@ On fuel cell teststands often the air flow $\dot m$ is lower and the volume $V$ 
 
 
 \end{document}
-
-
