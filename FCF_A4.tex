@@ -2,7 +2,7 @@
 % Just another Fuel Cell Formulary by Dr. Alexander Kabza
 %
 % Created: November 4, 2002 (started as Word document, converted to LaTeX in August 2010)
-% last modified: 2024-06-13 - this version can be optimized for DIN A4 page layout or Smartphone layout (DIN A5 page layout)!
+% last modified: 2025-03-19 - this version can be optimized for DIN A4 page layout or Smartphone layout (DIN A5 page layout)!
 %
 % Open issues: (marked by ***)
 % - 
@@ -371,14 +371,14 @@ Voltage losses are the result of
 The kinetics of ORR can be described with the Butler-Volmer equation. The Butler-Volmer equation defines the relation between current density $j$ and overpotential $\varphi$ of any electrochemical reaction:
 
 \[
-j(\varphi) = j_0 \left[\exp\left(\frac{\alpha n F}{RT}\: \varphi \right) - \exp\left(\frac{(1-\alpha) n F}{RT}\: \varphi \right) \right]
+j(\varphi) = j_0 \left[\exp\left(\frac{\alpha n F}{RT}\: \varphi \right) - \exp\left(\frac{-(1-\alpha) n F}{RT}\: \varphi \right) \right]
 \]
 
 This is the sum of an anodic and cathodic current $j(\varphi) = j_a(\varphi) + j_c(\varphi)$ with:
 
 \[
 j_a(\varphi) = j_0 \exp\left(\frac{\alpha n F}{RT}\: \varphi \right) \ \ \
-j_c(\varphi) = - j_0 \exp\left(\frac{(1-\alpha) n F}{RT}\: \varphi \right)
+j_c(\varphi) = - j_0 \exp\left(\frac{-(1-\alpha) n F}{RT}\: \varphi \right)
 \]
 
 Side information: $e^x - e^{-x} = 2 \sinh x$
