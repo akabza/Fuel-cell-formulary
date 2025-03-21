@@ -2,7 +2,7 @@
 % Just another Fuel Cell Formulary by Dr. Alexander Kabza
 %
 % Created: November 4, 2002 (started as Word document, converted to LaTeX in August 2010)
-% last modified: 2025-03-19 - this version can be optimized for DIN A4 page layout or Smartphone layout (DIN A5 page layout)!
+% last modified: 2025-03-21 - this version can be optimized for DIN A4 page layout or Smartphone layout (DIN A5 page layout)!
 %
 % Open issues: (marked by ***)
 % - 
@@ -12,6 +12,7 @@
 \documentclass[11pt,a4paper,english,twoside]{scrreprt}
 \usepackage{a4wide}
 \usepackage{version}
+\usepackage{url}
 \includeversion{A4}
 \excludeversion{Smartphone}
 
@@ -371,14 +372,14 @@ Voltage losses are the result of
 The kinetics of ORR can be described with the Butler-Volmer equation. The Butler-Volmer equation defines the relation between current density $j$ and overpotential $\varphi$ of any electrochemical reaction:
 
 \[
-j(\varphi) = j_0 \left[\exp\left(\frac{\alpha n F}{RT}\: \varphi \right) - \exp\left(\frac{-(1-\alpha) n F}{RT}\: \varphi \right) \right]
+j(\varphi) = j_0 \left[\exp\left(\frac{\alpha n F}{RT}\: \varphi \right) - \exp\left(-\frac{(1-\alpha) n F}{RT}\: \varphi \right) \right]
 \]
 
 This is the sum of an anodic and cathodic current $j(\varphi) = j_a(\varphi) + j_c(\varphi)$ with:
 
 \[
 j_a(\varphi) = j_0 \exp\left(\frac{\alpha n F}{RT}\: \varphi \right) \ \ \
-j_c(\varphi) = - j_0 \exp\left(\frac{-(1-\alpha) n F}{RT}\: \varphi \right)
+j_c(\varphi) = - j_0 \exp\left(-\frac{(1-\alpha) n F}{RT}\: \varphi \right)
 \]
 
 Side information: $e^x - e^{-x} = 2 \sinh x$
@@ -1430,7 +1431,7 @@ CAN & Controller Area Network
 
 \subsection{Water vapor saturation pressure}
 
-The water vapor partial pressure at saturation $p_\text{ws}(t)$ is a function of temperature $t\si{degreeCelsius}$. Its values are listed in tables (e.g. in \cite{HCP}, see also table \ref{table:pws}). There are several formulas to fit this table values and to calculate $p_\text{ws}(t)$ as a function of temperature. Maybe the most simple and therefore popular one is the Magnus equation. But other equations fit with a higher accuracy to the table values.
+The water vapor partial pressure at saturation $p_\text{ws}(t)$ is a function of temperature $t\si{degreeCelsius}$. Its values are listed in tables (e.g. in \cite{HCP}, see also table \ref{table:pws}). There are several formulas to fit this table values and to calculate $p_\text{ws}(t)$ as a function of temperature. It´s important to understand that all (or at least most) of these formulas are just approximations to the actual values. Maybe the most simple and therefore popular one is the Magnus equation. But other equations fit with a higher accuracy to the table values. Especially Vaisala presents in \cite{lit:Vaisala} some very accurate methods for humidity calculation considering the real gas properties and therefore also the pressure dependency. But those equations require iterative processes and no simple equations anymore. 
 
 \paragraph{Magnus equation:}
 
@@ -1441,6 +1442,8 @@ The water vapor partial pressure at saturation $p_\text{ws}(t)$ is a function of
 
 Magnus equation converted to temperature versus water vapor saturation pressure:
 \[t=\frac{C_3 \cdot \ln \frac{p_\text{ws}(t)}{C_1}}{C_2 -\ln \frac{p_\text{ws}(t)}{C_1}}\]
+
+Please take care that there are different constant values $C_1$, $C_2$ and $C_3$ for the Magnus equation used in the literature. The values used here are regarding the accuracy (see below) the best I could find so far. Magnus also destinguishs not between the real gas itself, e.g. air or hydrogen.
 
 \begin{figure}
   \centering
@@ -1466,21 +1469,23 @@ Magnus equation converted to temperature versus water vapor saturation pressure:
 
 $T$ is the temperature in Kelvin and $T_1 = \SI{273.16}{\kelvin}$ (the triple point of water).   
 
-\paragraph{Equation used by Vaisala (documented in old user manuals):}
-\[\Theta = T - \sum_{i=0}^3 C_i T^i\]
+\paragraph{Comparison of accuracy:} Comparing the equations results with the listed table values for the water vapor saturating pressures allows to benchmark the accuracy. Regarding the square sum of relative failures the Magnus equation (with the constant values used here) seems to be to most accurate equation, at least in between 0 and 100\gradC. 
 
-With $T$ = temperature in K, $C_0 = 0.4931358$, $C_1 = -4.6094296 \cdot 10^{-3}$, $C_2 = -1.3746454 \cdot 10^{-5}$, and $C_3 = -1.2743214 \cdot 10^{-8}$. 
+But comparing Magnus with the iterative calculation from Vaisala presented in \cite{lit:Vaisala} shows that the Vaisala calculation has a small pressure dependency, while Magnus is independent of pressure. That means that (independent of pressure) with Magnus the dew point temperature at 100\gradC\, and 100\% RH is always 100\gradC!
 
-\[\ln p_\text{ws}(T) = \sum_{i=-1}^3 b_i \Theta^i + b_4 \ln \Theta\]
+The Vailala calculation shows the following pressure dependency if the dew point temperature (at 100\gradC\, and 100\% RH) for air:
 
-With $b_{-1} = -5.8002206 \cdot 10^3$, $b_0 = 1.3914993$, $b_1 = -4.8640239 \cdot 10^{-2}$, $b_2 = 4.1764768 \cdot 10^{-5}$, $b_3 = -1.4452093 \cdot 10^{-8}$, and $b_4 = 6.5459673$.
+\begin{itemize}
+    \item 100.036°C at 1.1 barabs
+    \item 100.249°C at 2.0 barabs
+    \item 100.366°C at 3.0 barabs
+    \item 100.450°C at 4.0 barabs
+    \item 100.520°C at 5.0 barabs
+\end{itemize}
 
-\paragraph{Antoine equation:}
-\[\log_{10} p_\text{ws}(t) = A - \frac{B}{t + C}\]
+By the way: In hydrogen this failure seems to be much lower then for air!
 
-With $t$ = temperature in \gradC, $A = 10.20389$, $B = 1733.926$, and $C = 233.665$. Other parameters are defined depending on the temperature range.  
-
-\paragraph{Comparison of accuracy:} Between 25 and 100\gradC\ the WMO equation has the best accuracy compared to table values \ref{table:pws}. The maximum relative failure is 0.07\%, followed by the Vaisala equation with 0.10\%, Magnus with 0.17\% and Antoine with 0.36\%. Due to the simplicity of Magnus this is maybe the most preferable equation to fit the water vapor saturation pressure.
+If this small failure of Magnus versus Vaisala (which I consider as more precise) needs to be discussed individaully.
 
 \subsection{Other formulas to express humidity of air}
 
